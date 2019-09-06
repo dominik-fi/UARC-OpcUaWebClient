@@ -1,0 +1,10 @@
+﻿@await Html.PartialAsync("~/Views/Shared/Components/Config/Navbar.cshtml")
+
+<h6 class="bg-dark p-1 text-white">Zusammenfassung</h6>
+
+<p>Die Datenbankanbindung wurde erfolgreich entfernt.</p>
+
+<form asp-controller="ConfigSqlDatabase" asp-action="Index" method="post">
+    <p>Klicken Sie hier um zur Konfigurationsseite des SQL Servers zuzrückzukehren:</p>
+    <p><button type="submit" class="btn btn-primary">SQL Konfiguration</button></p>
+</form>

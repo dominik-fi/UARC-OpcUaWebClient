@@ -1,0 +1,16 @@
+﻿@model SqlDatabaseModel
+
+@await Html.PartialAsync("~/Views/Shared/Components/Config/Navbar.cshtml")
+
+<h6 class="bg-dark p-1 text-white">SQL Datenbank</h6>
+
+<form asp-action="CreateSqlDatabase" method="post">
+
+    <div class="form-group">
+        <label asp-for="ConnectionString"></label>
+        <input asp-for="ConnectionString" class="form-control" />
+    </div>
+
+    <button class="btn btn-primary" type="submit">Verbinden</button>
+    <a asp-action="Index" class="btn btn-secondary">Abbrechen</a>
+</form>

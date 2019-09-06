@@ -1,0 +1,14 @@
+﻿@model OpcUaVariableViewModel
+
+@await Html.PartialAsync("~/Views/Shared/Components/Config/Navbar.cshtml")
+
+<h6 class="bg-dark p-1 text-white">Zusammenfassung</h6>
+
+@if (@Model.VarDisplayName != null)
+{
+    <p>Die OPC UA Variable @Model.VarDisplayName wurde erfolgreich erstellt.</p>
+}
+else
+{
+    <p>Die Variable konnte nicht erstellt werden</p>
+}

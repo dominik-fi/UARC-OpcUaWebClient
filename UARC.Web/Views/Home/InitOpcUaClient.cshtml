@@ -1,0 +1,15 @@
+﻿@model OpcUaServerViewModel
+
+@await Html.PartialAsync("~/Views/Shared/Components/Home/Navbar.cshtml")
+
+<h6 class="bg-dark p-1 text-white">Zusammenfassung</h6>
+<p>Die OPC UA Session @Model.OpcUaServerLabel wurde erfolgreich aufgebaut.</p>
+
+@if (User.IsInRole("Admins"))
+{
+    @await Html.PartialAsync("~/Views/Shared/Components/Config/ConfigOpcUaServerButton.cshtml")
+}
+else
+{
+    @await Html.PartialAsync("~/Views/Shared/Components/Home/HomeButton.cshtml")
+}

@@ -1,0 +1,40 @@
+﻿@using Microsoft.Extensions.FileProviders
+@model IDirectoryContents
+
+@{
+    ViewData["Title"] = "Konfiguration";
+}
+
+@await Html.PartialAsync("~/Views/Shared/Components/Config/Navbar.cshtml")
+
+<h6 class="bg-dark p-1 text-white">Konfigurationsübersicht</h6>
+
+@if (Model.Count() == 0)
+{
+    <p class="p-1 text-black">Es sind keine Konfigurationsdateien vorhanden.</p>
+}
+
+else
+{
+    <table class="table table-bordered">
+        <tr>
+            <th>Dateiname</th>
+            <th>Ablageort</th>
+            <th>Aktion</th>
+        </tr>
+
+        @foreach (IFileInfo xmlItem in Model)
+        {
+            <tr>
+                <td>@xmlItem.Name</td>
+                <td>@xmlItem.PhysicalPath</td>
+                <td>
+                    <a asp-controller="Config" asp-action="CreateUarcClients" asp-route-filePath="@xmlItem.PhysicalPath">Anwenden</a>
+                    <a asp-controller="Config" asp-action="DownloadXmlConfig" asp-route-filePath="@xmlItem.PhysicalPath" asp-route-exampleFileName="@xmlItem.Name">Download</a>
+                    <a asp-controller="Config" asp-action="DeleteXmlConfig" asp-route-filePath="@xmlItem.PhysicalPath" asp-route-exampleFileName="@xmlItem.Name">Löschen</a>
+                </td>
+            </tr>
+        }
+    </table>
+}
+

@@ -1,0 +1,20 @@
+﻿@model OpcUaServerViewModel
+
+@await Html.PartialAsync("~/Views/Shared/Components/Config/Navbar.cshtml")
+
+<h6 class="bg-dark p-1 text-white">Zusammenfassung</h6>
+
+@if (@Model.OpcUaServerLabel != null)
+{
+    <p>Der OPC UA Client @Model.OpcUaServerLabel wurde erfolgreich erstellt.</p>
+
+    <form>
+        <button asp-controller="ConfigOpcUaSubscription" asp-action="MakeOpcUaSubscription" class="btn btn-primary">Erstellen einer neuen Subscription</button>
+        <a asp-action="Index" class="btn btn-secondary">Fertig</a>
+    </form>
+}
+else
+{
+    <p>Der Client konnte nicht erstellt werden.</p>
+    <a asp-action="Index" class="btn btn-secondary">Zurück</a>
+}

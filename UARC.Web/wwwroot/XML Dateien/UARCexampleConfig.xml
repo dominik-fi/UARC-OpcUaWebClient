@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<XmlUarcConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <OPCUAServers>
+    <OPCUAServer Serverbezeichnung="OPC UA Server - OPC Foundation" URL="opc.tcp://localhost:53530/OPCUA/SimulationServer">
+      <Benutzer>Default</Benutzer>
+      <Passwort>0815</Passwort>
+      <Subscriptions>
+        <Subscription AbfrageInterval="1">
+          <OPCVariablen>
+            <OPCVariable Name="Var1" S7_Datenbaustein="" S7_VariablenName="" NodeID="ns=5;s=Counter1" EinsammelInterval="100" />
+          </OPCVariablen>
+        </Subscription>
+      </Subscriptions>
+    </OPCUAServer>
+    <OPCUAServer Serverbezeichnung="Anlage1" URL="opc.tcp://192.168.0.1:4840">
+      <Benutzer>SIEMENS</Benutzer>
+      <Passwort>0815</Passwort>
+      <Subscriptions>
+        <Subscription AbfrageInterval="10">
+          <OPCVariablen>
+            <OPCVariable Name="Var1" S7_Datenbaustein="OpcUaData" S7_VariablenName="Counter 1" NodeID="" EinsammelInterval="1000" />
+          </OPCVariablen>
+        </Subscription>
+      </Subscriptions>
+    </OPCUAServer>
+  </OPCUAServers>
+  <SQLServerKonfiguration>
+    <SqlConnectionString>Server=localhost\SQLEXPRESS;Database=OpcUaDataDb;Trusted_Connection=True;</SqlConnectionString>
+  </SQLServerKonfiguration>
+</XmlUarcConfig>

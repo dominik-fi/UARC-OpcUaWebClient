@@ -1,0 +1,15 @@
+﻿@model string
+
+@await Html.PartialAsync("~/Views/Shared/Components/AccountManage/Navbar.cshtml")
+
+<h6 class="bg-dark p-1 text-white">Benutzergruppe erstellen</h6>
+
+<div asp-validation-summary="All" class="text-danger"></div>
+<form asp-action="Create" method="post">
+    <div class="form-group">
+        <label for="name"></label>
+        <input name="name" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Erstellen</button>
+    <a asp-action="Index" class="btn btn-secondary">Abbrechen</a>
+</form>

@@ -1,0 +1,11 @@
+﻿@model UserLoginModel
+
+@{
+    ViewData["Title"] = "Login Fehler";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+
+<h5 class="bg-danger p-1 text-white">Zugang verweigert.</h5>
+
+<a asp-controller="Home" asp-action="Index" class="btn btn-outline-dark">OK</a>
+

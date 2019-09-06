@@ -1,0 +1,63 @@
+﻿@model IDictionary<string, UarcOpcUaClient>
+
+@await Html.PartialAsync("~/Views/Shared/Components/Config/Navbar.cshtml")
+
+<h6 class="bg-dark p-1 text-white">OPC UA Verbindungen</h6>
+
+@if (Model.Count() == 0)
+{
+    <p>Es sind keine Server/Verbindungen konfiguriert</p>
+}
+else
+{
+    <table class="table table-bordered">
+        <tr>
+            <th>Serverbezeichnung</th>
+            <th>Status</th>
+            <th>Anzahl Subscriptions</th>
+        </tr>
+
+        @foreach (KeyValuePair<string, UarcOpcUaClient> client in Model)
+        {
+            <tr>
+                <td>@client.Key</td>
+                <td>
+                    @if (client.Value.Session == null)
+                    {
+                        <div>Es ist keine Session erstellt</div>
+                    }
+                    else
+                    {
+                        <div>Eine Session ist eine Session erstellt</div>
+
+                        @if (!client.Value.Session.KeepAliveStopped)
+                        {
+                            <div>Die Verbindung ist aktiv</div>
+                        }
+                        else
+                        {
+                            <div>Die Verbindung ist nicht intakt</div>
+                        }
+                    }
+                </td>
+                <td>
+                    @if (client.Value.Session == null)
+                    {
+                        @client.Value.Subscriptions.Count()
+                    }
+                    else
+                    {
+                        @client.Value.Session.SubscriptionCount
+                    }
+                </td>
+            </tr>
+        }
+    </table>
+}
+
+<h6 class="bg-dark p-1 text-white">Konfiguration Exportieren</h6>
+
+<form asp-controller="ConfigBackup" asp-action="Export">
+    <p>Exportieren und speichern der Konfiguration aller OPC UA Verbindungen als XML Konfigurationsdatei:</p>
+    <button type="submit" class="btn btn-primary">Export</button>
+</form>

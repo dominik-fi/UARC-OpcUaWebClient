@@ -1,0 +1,63 @@
+﻿@model IDictionary<string, UarcOpcUaClient>
+
+@await Html.PartialAsync("~/Views/Shared/Components/Config/Navbar.cshtml")
+
+<h6 class="bg-dark p-1 text-white">OPC UA Subscriptions</h6>
+
+@if (Model.Count() == 0)
+{
+    <p>Es sind keine Verbindungen konfiguriert.</p>
+}
+else
+{
+    <table class="table table-bordered">
+        <tr>
+            <th>Serverbezeichnung</th>
+            <th>Status</th>
+            <th>Anzahl Subscriptions</th>
+            <th>Aktion</th>
+        </tr>
+
+        @foreach (KeyValuePair<string, UarcOpcUaClient> client in Model)
+        {
+            <tr>
+                <td>@client.Key</td>
+                <td>
+                    @if (client.Value.Session == null)
+                    {
+                        <div>Es ist keine Session erstellt</div>
+                    }
+                    else
+                    {
+                        <div>Eine Session ist eine Session erstellt</div>
+
+                        @if (!client.Value.Session.KeepAliveStopped)
+                        {
+                            <div>Die Verbindung ist aktiv</div>
+                        }
+                        else
+                        {
+                            <div>Die Verbindung ist nicht intakt</div>
+                        }
+                    }
+                </td>
+                <td>
+                    @if (client.Value.Session == null)
+                    {
+                        <div>Konfigurierte Subscriptions: @client.Value.Subscriptions.Count()</div>
+                    }
+                    else
+                    {
+                        <div>Aktive Subscriptions: @client.Value.Session.SubscriptionCount</div>
+                    }
+                </td>
+                <td>
+                    <a asp-controller="ConfigOpcUaSubscription" asp-action="OverviewOpcUaSubscription" asp-route-clientKey="@client.Key">Subscriptions anzeigen</a>
+                </td>
+            </tr>
+        }
+    </table>
+
+    <h6 class="bg-dark p-1 text-white">Neuen Subscription hinzufügen</h6>
+    <p><a asp-action="MakeOpcUaSubscription" class="btn btn-primary">Erstellen einer neuen Subscription</a></p>
+}

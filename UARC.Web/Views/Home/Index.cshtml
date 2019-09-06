@@ -1,0 +1,56 @@
+﻿@model IDictionary<string, UarcOpcUaClient>
+
+@await Html.PartialAsync("~/Views/Shared/Components/Home/Navbar.cshtml")
+
+<h6 class="bg-dark p-1 text-white">OPC UA Verbindungen</h6>
+
+@if (Model.Count() == 0)
+{
+    <p>Es sind keine Verbindungen konfiguriert.</p>
+}
+else
+{
+    <table class="table table-bordered">
+        <tr>
+            <th>Serverbezeichnung</th>
+            <th>Status</th>
+            <th>Aktion</th>
+        </tr>
+
+        @foreach (KeyValuePair<string, UarcOpcUaClient> client in Model)
+        {
+            <tr>
+                <td>@client.Key</td>
+                <td>
+                    @if (client.Value.Session == null)
+                    {
+                        <div>Es ist keine Session erstellt</div>
+                    }
+                    else
+                    {
+                        <div>Eine Session ist erstellt</div>
+
+                        @if (!client.Value.Session.KeepAliveStopped)
+                        {
+                            <div>Die Verbindung ist aktiv</div>
+                        }
+                        else
+                        {
+                            <div>Die Verbindung ist nicht intakt</div>
+                        }
+                    }
+                </td>
+                <td>
+                    @if (client.Value.Session == null)
+                    {
+                        <div><a asp-controller="Home" asp-action="InitOpcUaClient" asp-route-clientKey="@client.Key">Verbindung aufbauen</a></div>
+                    }
+                    else
+                    {
+                        <div><a asp-controller="Home" asp-action="CloseOpcUaClient" asp-route-clientKey="@client.Key">Verbindung abbauen</a></div>
+                    }
+                <td>
+            </tr>
+        }
+    </table>
+}

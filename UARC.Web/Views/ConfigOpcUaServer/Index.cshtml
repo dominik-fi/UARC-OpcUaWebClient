@@ -1,0 +1,61 @@
+﻿@model IDictionary<string, UarcOpcUaClient>
+
+@await Html.PartialAsync("~/Views/Shared/Components/Config/Navbar.cshtml")
+
+<h6 class="bg-dark p-1 text-white">OPC UA Server</h6>
+
+@if (Model.Count() == 0)
+{
+    <p>Es sind keine Server/Verbindungen konfiguriert.</p>
+}
+
+else
+{
+    <table class="table table-bordered">
+        <tr>
+            <th>Dateiname</th>
+            <th>Verbindungsstatus</th>
+            <th>Aktion</th>
+        </tr>
+
+        @foreach (KeyValuePair<string, UarcOpcUaClient> client in Model)
+        {
+            <tr>
+                <td>
+                    @client.Key
+                </td>
+                <td>
+                    @if (client.Value.Session != null)
+                    {
+                        if (!client.Value.Session.KeepAliveStopped)
+                        {
+                            <div>Verbunden</div>
+                        }
+                        else
+                        {
+                            <div>Session nicht aktiv verbunden</div>
+                        }
+                    }
+                    else
+                    {
+                        <div>Keine Session vorhanden</div>
+                    }
+                </td>
+                <td>
+                    @if (client.Value.Session == null)
+                    {
+                        <a asp-controller="Home" asp-action="InitOpcUaClient" asp-route-clientKey="@client.Key">Verbindung aufbauen</a>
+                        <a asp-controller="ConfigOpcUaServer" asp-action="DeleteOpcUaClient" asp-route-clientKey="@client.Key">Verbindung entfernen</a>
+                    }
+                    else
+                    {
+                        <a asp-controller="Home" asp-action="CloseOpcUaClient" asp-route-clientKey="@client.Key">Verbindung abbauen</a>
+                    }
+                </td>
+            </tr>
+        }
+    </table>
+}
+
+<h6 class="bg-dark p-1 text-white">Neuen OPC UA Server/Verbindung hinzufügen</h6>
+<p><a class="btn btn-primary" asp-controller="ConfigOpcUaServer" asp-action="MakeOpcUaClient">Erstellen eines neuen Clients</a></p>

@@ -1,0 +1,33 @@
+﻿@model OpcUaSubscriptionViewModel
+
+@await Html.PartialAsync("~/Views/Shared/Components/Config/Navbar.cshtml")
+
+<h6 class="bg-dark p-1 text-white">OPC UA Subscription Ändern</h6>
+
+<form asp-action="EditOpcUaSubscription" method="post">
+
+    <div class="form-group">
+        <label asp-for="SubId">ID der Subscription</label>
+        <input asp-for="SubId" asp-route-id="Id" class="form-control" hidden />
+        <input asp-for="SubId" asp-route-id="Id" class="form-control" disabled />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ClientKey">Verbindung</label>
+        <input asp-for="ClientKey" asp-route-clientKey="ClientKey" class="form-control" hidden />
+        <input asp-for="ClientKey" asp-route-clientKey="ClientKey" class="form-control" disabled />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="SubDisplayName">Bezeichnung der Subscription</label>
+        <input asp-for="SubDisplayName" asp-route-displayName="DisplayName" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="PublishingInterval">Abrufintervall der Variablen</label>
+        <input asp-for="PublishingInterval" asp-route-publishingInterval="PublishingInterval" class="form-control" />
+    </div>
+
+    <button class="btn btn-primary" type="submit">Ändern</button>
+    <a asp-action="Index" class="btn btn-secondary">Abbrechen</a>
+</form>

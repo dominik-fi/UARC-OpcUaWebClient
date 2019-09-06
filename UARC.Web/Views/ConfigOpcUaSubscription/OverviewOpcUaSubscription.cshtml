@@ -1,0 +1,65 @@
+﻿@using Opc.Ua.Client
+
+@model OpcUaSubscriptionViewModel
+
+@await Html.PartialAsync("~/Views/Shared/Components/Config/Navbar.cshtml")
+
+<h6 class="bg-dark p-1 text-white">Vorhandene OPC UA Subscriptions der Verbindung @Model.ClientKey</h6>
+
+@if (Model.Subscriptions.Count() == 0)
+{
+    <p>Es sind keine Subscriptions konfiguriert.</p>
+}
+else
+{
+    <table class="table table-bordered">
+        <tr>
+            <th>Bezeichnung</th>
+            <th>ID</th>
+            <th>Abrufinterval</th>
+            <th>Status</th>
+            <th>Zugeordnete Variablen</th>
+            <th>Aktion</th>
+        </tr>
+
+        @foreach (Subscription sub in Model.Subscriptions)
+        {
+            <tr>
+                <td>@sub.DisplayName</td>
+                <td>@sub.Id</td>
+                <td>@sub.PublishingInterval</td>
+                <td>
+                    @if (sub.Created == true)
+                    {
+                        <div>Aktiv</div>
+                    }
+                    else
+                    {
+                        <div>Inaktiv</div>
+                    }
+                </td>
+                <td>@sub.MonitoredItemCount</td>
+                <td>
+                    @if (Model.ActivatedSession == true)
+                    {
+                        <div>Die Subscriptions können nur bei einer inaktiven Session bearbeitet werden.</div>
+                    }
+                    else
+                    {
+                        <a asp-controller="ConfigOpcUaSubscription" asp-action="DeleteOpcUaSubscription" asp-route-clientKey="@Model.ClientKey" asp-route-subDisplayName="@sub.DisplayName">Subscription löschen</a>
+                        <a asp-controller="ConfigOpcUaSubscription" asp-action="EditOpcUaSubscription" asp-route-clientKey="@Model.ClientKey" asp-route-subDisplayName="@sub.DisplayName">Subscription bearbeiten</a>
+                        <a asp-controller="ConfigOpcUaVariable" asp-action="OverviewOpcUaVar" asp-route-clientKey="@Model.ClientKey" asp-route-subDisplayName="@sub.DisplayName">Variablen bearbeiten</a>
+                    }
+                </td>
+            </tr>
+        }
+    </table>
+}
+
+@if (Model.ActivatedSession != true)
+{
+    <form>
+        <a asp-action="MakeOpcUaSubscription" asp-route-clientKey="@Model.ClientKey" class="btn btn-primary">Neue Subscription anlegen</a>
+        <a asp-action="Index" class="btn btn-secondary">Abbrechen</a>
+    </form>
+}

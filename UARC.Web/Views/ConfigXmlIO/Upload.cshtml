@@ -1,0 +1,17 @@
+﻿@model XmlConfigViewModel
+
+@await Html.PartialAsync("~/Views/Shared/Components/Config/Navbar.cshtml")
+
+<div class="p-1">
+    <div>Hochladen der XML-Konfigurationsdatei erfolgreich.</div>
+    <div>Datei gespeichert unter: @Model.Path</div>
+</div>
+
+<form asp-controller="ConfigXmlIO" asp-action="Check" asp-route-path="@Model.Path">
+    <div class="form-group">
+        <div class="p-1">
+            <p>Klicken Sie hier zum testen der Konfigurationsdatei:</p>
+            <button type="submit" class="btn btn-primary">Testen der Datei</button>
+        </div>
+    </div>
+</form>

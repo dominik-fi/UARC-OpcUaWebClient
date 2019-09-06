@@ -1,0 +1,17 @@
+﻿@await Html.PartialAsync("~/Views/Shared/Components/Config/Navbar.cshtml")
+
+<h6 class="bg-dark p-1 text-white">Zusammenfassung</h6>
+
+<p>Die Datenbankanbindung wurde erfolgreich erstellt.</p>
+
+@if (Program.UarcCollector.OpcUaVerbindungen.Count != 0)
+{
+    <form asp-controller="ConfigSqlDatabase" asp-action="RecreateUarcAsync">
+        <p><label>Alle Verbindungen mit der neuen Datenbank verknüpfen (Alle Verbindungen werden unterbrochen und neu erstellt):</label></p>
+        <p><button type="submit" class="btn btn-primary">Verbindungen erneuern</button></p>
+    </form>
+}
+else
+{
+    @await Html.PartialAsync("~/Views/Shared/Components/Config/ConfigOpcUaServerButton.cshtml")
+}

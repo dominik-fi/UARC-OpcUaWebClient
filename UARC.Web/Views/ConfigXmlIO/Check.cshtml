@@ -1,0 +1,17 @@
+﻿@using System.IO;
+@model XmlConfigViewModel
+
+@await Html.PartialAsync("~/Views/Shared/Components/Config/Navbar.cshtml")
+
+<div class="p-1">
+    <div>Konfigurationsdatei scheint gültig zu sein.</div>
+</div>
+
+<form asp-controller="Config" asp-action="CreateUarcClients" asp-route-filePath="@Model.Path" method="post">
+    <div class="form-group">
+        <div class="p-1">
+            <p>Klicken Sie hier um die Verbindungen mithilfe der Konfigurationsdatei @System.IO.Path.GetFileName(Model.Path) zu erstellen.</p>
+            <button type="submit" class="btn btn-primary">Verbindungen erstellen</button>
+        </div>
+    </div>
+</form>

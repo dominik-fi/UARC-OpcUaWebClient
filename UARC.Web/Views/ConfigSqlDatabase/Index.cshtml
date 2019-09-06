@@ -1,0 +1,26 @@
+﻿@model SqlDatabaseViewModel
+
+@await Html.PartialAsync("~/Views/Shared/Components/Config/Navbar.cshtml")
+
+<h6 class="bg-dark p-1 text-white">SQL Datenbank</h6>
+
+@if (Model.ConnectionString == null)
+{
+    <p class="text-black">Es ist noch keine SQL Datenbank konfiguriert.</p>
+    <p><a class="btn btn-primary" asp-controller="ConfigSqlDatabase" asp-action="MakeSqlDatabase">Neue Datenbankverbindung</a></p>
+}
+
+else
+{
+    <table class="table table-bordered">
+        <tr>
+            <th>Verbindung</th>
+            <th>Aktion</th>
+        </tr>
+        <tr>
+            <td>@Model.ConnectionString</td>
+            <td><a asp-controller="ConfigSqlDatabase" asp-action="DeleteSqlDatabase">Löschen dieser Datenbankanbindung</a></td>
+        </tr>
+
+    </table>
+}

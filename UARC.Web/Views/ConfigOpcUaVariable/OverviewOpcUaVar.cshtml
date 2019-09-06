@@ -1,0 +1,40 @@
+﻿@using Opc.Ua.Client
+
+@model OpcUaVariableViewModel
+
+@await Html.PartialAsync("~/Views/Shared/Components/Config/Navbar.cshtml")
+
+<h6 class="bg-dark p-1 text-white">Vorhandene OPC UA Variablen der Subscription @Model.SubDisplayName der Verbindung @Model.ClientKey</h6>
+
+@if (Model.Vars.Count() == 0)
+{
+    <p>Es sind keine Variablen konfiguriert.</p>
+}
+else
+{
+    <table class="table table-bordered">
+        <tr>
+            <th>Bezeichnung</th>
+            <th>Einsammel Intervall</th>
+            <th>Node ID</th>
+            <th>Aktion</th>
+        </tr>
+
+        @foreach (MonitoredItem var in Model.Vars)
+        {
+            <tr>
+                <td>@var.DisplayName</td>
+                <td>@var.SamplingInterval</td>
+                <td>@var.StartNodeId</td>
+                <td>
+                    <a asp-controller="ConfigOpcUaVariable" asp-action="DeleteOpcUaVar" asp-route-clientKey="@Model.ClientKey" asp-route-varDisplayName="@var.DisplayName" asp-route-subName="@Model.SubDisplayName">Variable löschen</a>
+                </td>
+            </tr>
+        }
+    </table>
+}
+
+<form>
+    <a asp-controller="ConfigOpcUaVariable" asp-action="MakeOpcUaVar" class="btn btn-primary" asp-route-clientKey="@Model.ClientKey" asp-route-subDisplayName="@Model.SubDisplayName">Variable hinzufügen</a>
+    <a asp-action="Index" class="btn btn-secondary">Abbrechen</a>
+</form>

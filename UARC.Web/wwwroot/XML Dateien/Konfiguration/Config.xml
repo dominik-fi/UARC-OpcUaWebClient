@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<XmlUarcConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <OPCUAServers>
+    <OPCUAServer Serverbezeichnung="OPC UA Server - OPC Foundation" URL="opc.tcp://DESKTOP-6FBCMKF:53530/OPCUA/SimulationServer">
+      <Benutzer>SIEMENS</Benutzer>
+      <Passwort>0815</Passwort>
+      <Subscriptions>
+        <Subscription AbfrageInterval="1">
+          <OPCVariablen>
+            <OPCVariable Name="Counter1" NodeID="ns=5;s=Counter1" EinsammelInterval="100" />
+          </OPCVariablen>
+        </Subscription>
+      </Subscriptions>
+    </OPCUAServer>
+  </OPCUAServers>
+  <SQLServerKonfiguration>
+    <SqlConnectionString>Server=DESKTOP-6FBCMKF\SQLEXPRESS;Database=OpcUaDataDb;Trusted_Connection=True;</SqlConnectionString>
+  </SQLServerKonfiguration>
+</XmlUarcConfig>

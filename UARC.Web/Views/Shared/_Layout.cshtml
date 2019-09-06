@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewData["Title"] UARC-Collector</title>
+
+    <environment names="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/css/site.css" />
+    </environment>
+    <environment names="Staging,Production">
+        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/4.1.3/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+    </environment>
+</head>
+
+<body>
+    <p class="h1 p-1">UARC-Collector</p>
+    <div class="bg-dark p-1 text-white text-right">
+        <div class="h-auto">Angemeldet als: @User?.Identity?.Name</div>
+        <a asp-controller="Account" asp-action="Logout" class="btn btn-light">Logout</a>
+    </div>
+    <div class="row">
+        <div class="col-auto">
+            <ul class="nav nav-tabs flex-column">
+                <li class="nav-item">
+                    <a asp-controller="Home" asp-action="Index" class="nav-link">Übersicht</a>
+                </li>
+                <li class="nav-item">
+                    <a asp-controller="Config" asp-action="Index" class="nav-link">Konfiguration</a>
+                </li>
+                <li class="nav-item">
+                    <a asp-controller="Account" asp-action="Index" class="nav-link">Benutzerverwaltung</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col">
+            @RenderBody()
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2018 - UARC-Collector</p>
+    </footer>
+
+    <environment names="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+    </environment>
+    <environment names="Staging,Production">
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.0.0.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery">
+        </script>
+        <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/4.1.3/bootstrap.min.js"
+                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal">
+        </script>
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+    </environment>
+</body>
+</html>

@@ -1,0 +1,25 @@
+﻿@model UserIdentityCreate
+
+@await Html.PartialAsync("~/Views/Shared/Components/AccountManage/Navbar.cshtml")
+
+<h6 class="bg-dark p-1 text-white">Benutzer Erstellen</h6>
+
+<div asp-validation-summary=" All" class="text-danger"></div>
+
+<form asp-action="Create" method="post">
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Email"></label>
+        <input asp-for="Email" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Password"></label>
+        <input asp-for="Password" type="password" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Erstellen</button>
+    <a asp-controller="AccountManage" asp-action="Index" class="btn btn-secondary">Abbrechen</a>
+</form>
+

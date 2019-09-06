@@ -1,0 +1,41 @@
+﻿@model IEnumerable<AppUser>
+
+@await Html.PartialAsync("~/Views/Shared/Components/AccountManage/Navbar.cshtml")
+
+<h6 class="bg-dark p-1 text-white">Benutzer</h6>
+
+<div class="text-danger" asp-validation-summary="ModelOnly"></div>
+
+<table class="table table-bordered">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Aktion</th>
+    </tr>
+
+    @if (Model.Count() == 0)
+    {
+        <tr><td colspan="4" class="text-center">Keine Benutzer vorhanden.</td></tr>
+    }
+    else
+    {
+        foreach (AppUser user in Model)
+        {
+            <tr>
+                <td>@user.Id</td>
+                <td>@user.UserName</td>
+                <td>@user.Email</td>
+                <td>
+                    <form asp-action="Delete" asp-route-id="@user.Id" method="post">
+                        <a class="btn btn-primary" asp-action="Edit" asp-route-id="@user.Id">Bearbeiten</a>
+                        <button type="submit" class="btn btn-primary">Löschen</button>
+                    </form>                
+                </td>
+            </tr>
+        }
+    }
+</table>
+
+<a class="btn btn-primary" asp-action="Create">Neuen Benutzer anlegen</a>
+

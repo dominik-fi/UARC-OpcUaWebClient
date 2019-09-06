@@ -1,0 +1,16 @@
+﻿@model XmlConfigViewModel
+
+@await Html.PartialAsync("~/Views/Shared/Components/Config/Navbar.cshtml")
+
+<h6 class="bg-dark p-1 text-white">Zusammenfassung</h6>
+
+<p>Die Konfiguration aus der Datei "@Model.Path" wurde erfolgreich geladen.<p>
+
+@if (User.IsInRole("Admins"))
+{
+    @await Html.PartialAsync("~/Views/Shared/Components/Config/ConfigOpcUaServerButton.cshtml")
+}
+else
+{
+    @await Html.PartialAsync("~/Views/Shared/Components/Home/HomeButton.cshtml")
+}

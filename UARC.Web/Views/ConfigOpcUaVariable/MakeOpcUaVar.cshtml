@@ -1,0 +1,50 @@
+﻿@model OpcUaVariableViewModel
+
+@await Html.PartialAsync("~/Views/Shared/Components/Config/Navbar.cshtml")
+
+<h6 class="bg-dark p-1 text-white">OPC UA Variable zur Verbindung @Model.ClientKey</h6>
+
+<div asp-validation-summary=" All" class="text-danger"></div>
+
+<form asp-action="CreateOpcUaVar" method="post">
+
+    <div class="form-group">
+        <label asp-for="ClientKey">Verbindung</label>
+        <input asp-for="ClientKey" asp-route-clientKey="ClientKey" class="form-control" hidden />
+        <input asp-for="ClientKey" asp-route-clientKey="ClientKey" class="form-control" disabled />
+    </div>
+
+    @if ((Model.SubDisplayName == null) && (Model.Subscriptions != null))
+    {
+        <div class="form-group">
+            <label asp-for="SubDisplayName">Subscription</label>
+            <select asp-for="SubDisplayName" asp-route-subDisplayName="SubscriptionDisplayName" asp-items="@(new SelectList(Model.Subscriptions))" class="form-control"></select>
+        </div>
+    }
+    else
+    {
+        <div class="form-group">
+            <label asp-for="SubDisplayName">Subscription</label>
+            <input asp-for="SubDisplayName" asp-route-subDisplayName="SubscriptionDisplayName" class="form-control" hidden />
+            <input asp-for="SubDisplayName" asp-route-subDisplayName="SubscriptionDisplayName" class="form-control" disabled />
+        </div>
+    }
+
+    <div class="form-group">
+        <label asp-for="VarDisplayName">Variablen Name</label>
+        <input asp-for="VarDisplayName" asp-route-varDisplayName="VarDisplayName" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="NodeId">Node ID</label>
+        <input asp-for="NodeId" asp-route-nodeId="NodeId" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="SamplingInterval">Einsammel Intervall</label>
+        <input asp-for="SamplingInterval" sp-route-samplingInterval="SamplingInterval" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Erstellen</button>
+    <a asp-action="Index" class="btn btn-secondary">Abbrechen</a>
+</form>

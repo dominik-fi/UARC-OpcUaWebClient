@@ -1,0 +1,14 @@
+﻿@await Html.PartialAsync("~/Views/Shared/Components/Config/Navbar.cshtml")
+
+<h6 class="bg-dark p-1 text-white">Importieren einer XML Konfiguration</h6>
+<form method="post" enctype="multipart/form-data" asp-controller="ConfigXmlIO" asp-action="Upload">
+    <p>Hochladen der XML-Konfigurationsdatei:</p>
+    <p><input type="file" name="file" /></p>
+    <p><button type="submit" class="btn btn-primary">Upload</button></p>
+</form>
+
+<h6 class="bg-dark p-1 text-white">Exportieren einer Beispiel Konfigurationsdatei</h6>
+<form asp-controller="ConfigXmlIO" asp-action="Download">
+    <p>Herunterladen der Beispiel XML-Konfigurationsdatei:</p>
+    <button type="submit" class="btn btn-primary">Download</button>
+</form>

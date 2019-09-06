@@ -1,0 +1,39 @@
+﻿@model ErrorViewModel
+
+@{
+    ViewData["Title"] = "Error";
+}
+<div class="bg-light m-1"></div>
+
+<div class="bg-danger p-2 text-white">
+    <h5>Error.</h5>
+    <h5>Fehler beim Verarbeiten der Eingabe</h5>
+</div>
+
+@if (Model.ErrorMessage != null)
+{
+    <p>
+        <strong>Fehlermeldung:</strong> 
+        @Model.ErrorMessage
+    </p>
+    <p>
+        <strong>Kontroller:</strong>
+        @Model.ErrorPath
+    </p>
+
+}
+
+@if (Model.ShowRequestId)
+{
+    <p>
+        <strong>Request ID:</strong> <code>@Model.RequestId</code>
+    </p>
+
+    <h3>Development Mode</h3>
+    <p>
+        Swapping to <strong>Development</strong> environment will display more detailed information about the error that occurred.
+    </p>
+    <p>
+        <strong>Development environment should not be enabled in deployed applications</strong>, as it can result in sensitive information from exceptions being displayed to end users. For local debugging, development environment can be enabled by setting the <strong>ASPNETCORE_ENVIRONMENT</strong> environment variable to <strong>Development</strong>, and restarting the application.
+    </p>
+}
