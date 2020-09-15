@@ -1,4 +1,4 @@
-# UARC
+# UARC - OPC UA Web Client
 OPC UA ASP .NET Core 2.2 Web Client
 
 Hallo miteinander und Wilkommen im README meines ersten Software Projektes!
